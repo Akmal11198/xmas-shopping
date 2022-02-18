@@ -1,0 +1,10 @@
+ul.separator {
+	list-style: none;
+	padding: 0;
+}
+
+ul.separator li {
+	padding: .5em 0;
+	border-bottom: 1px solid #CCC;
+	text-align: center;
+}
