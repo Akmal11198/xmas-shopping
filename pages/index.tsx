@@ -18,7 +18,7 @@ const Home = (props:{users:User[],products:CartItem[]}) => {
     <div id="mainDiv">
       <h1 id="mainH">Welcome To Droppe Xmas</h1>
       <Link href="/wishlists" as="/wishlists"  passHref>
-        <button id="button">Let's Get Started</button>
+        <button id="button">Let&apos;s Get Started</button>
       </Link>
     </div>
   );

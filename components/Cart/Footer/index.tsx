@@ -8,7 +8,7 @@ export const Footer=()=>{
             <div className={styles.price}>
             <p>Total: {cart?.total} $</p>
             </div>
-            <Link href={"/confirmation"}>
+            <Link href={"/confirmation"} passHref>
             <button>Confirm Cart</button>
             </Link>
         </div>

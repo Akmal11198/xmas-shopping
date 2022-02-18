@@ -13,11 +13,11 @@ export const ListContent = () => {
         const items=bin?.filter(i=>(i.userId===users[curUser!].id))
         setProducts(items)
       }
-  },[curUser])
+  },[curUser,users,bin])
   console.log(products)
   return (
     <div className={styles.content}>
-      <h2 className={styles.info}>{user?.name?.firstname} {user?.name?.lastname}'s Wish List</h2>
+      <h2 className={styles.info}>{user?.name?.firstname} {user?.name?.lastname}&apos;s Wish List</h2>
       {products?.map((p,index:number)=>(
         <div key={index}>
        <ProductCard  item={p}/>

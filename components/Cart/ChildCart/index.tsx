@@ -51,7 +51,7 @@ export const ChildCart = (props: { user: User; ignore?: boolean }) => {
   return (
     <>
       <h3>
-        {user.name.firstname + " " + user.name.lastname}'s{" "}
+        {user.name.firstname + " " + user.name.lastname}&apos;s{" "}
         {ignore ? "ignored items" : "Cart"}
       </h3>
       {userCart && userCart.length > 0 ? (
@@ -73,7 +73,7 @@ export const ChildCart = (props: { user: User; ignore?: boolean }) => {
           </ul>
           {!ignore && (
             <h6>
-              {user.name.firstname}'s total: {total}$
+              {user.name.firstname}&apos;s total: {total}$
             </h6>
           )}
         </>
