@@ -7,45 +7,42 @@ export const ChildCart = (props: { user: User; ignore?: boolean }) => {
   const { cart, round, bin } = useAppContext();
   const [userCart, setUserCart] = useState(null as unknown as CartItem[]);
   useEffect(() => {
-    if (userCart) {
-      fetch(`https://fakestoreapi.com/carts`, {
-        method: "POST",
-        body: JSON.stringify({
-          userId: user.id,
-          date: Date.now(),
-          products: userCart.map((item) => ({
-            productId: item.product.id,
-            quantity: item.count
-          })),
-        }),
-      });
-    } else {
-      const boughtItems = cart?.items?.filter(
-        (item) => item.userId === user.id
-      );
-      if (ignore) {
-        const allItems = bin?.filter((item) => item.userId === user.id);
-        if (allItems) {
-          if (boughtItems && boughtItems.length > 0) {
-            let ignored: CartItem[] = [];
-            for (let i of allItems) {
-              let found = false;
-              for (let c of boughtItems) {
-                if (i.product.id === c.product.id) {
-                  found = true;
-                  break;
-                }
+    let finalCart:CartItem[]=[];
+    const boughtItems = cart?.items?.filter((item) => item.userId === user.id);
+    if (ignore) {
+      const allItems = bin?.filter((item) => item.userId === user.id);
+      if (allItems) {
+        if (boughtItems && boughtItems.length > 0) {
+          let ignored: CartItem[] = [];
+          for (let i of allItems) {
+            let found = false;
+            for (let c of boughtItems) {
+              if (i.product.id === c.product.id) {
+                found = true;
+                break;
               }
-              if (!found) ignored.push(i);
             }
-            setUserCart(ignored);
-          } else setUserCart(allItems);
-        }
-      } else {
-        setUserCart(boughtItems!);
+            if (!found) ignored.push(i);
+          }
+          finalCart=ignored;
+        } else finalCart=allItems;
       }
+    } else {
+      finalCart=boughtItems!
     }
-  }, [userCart]);
+    setUserCart(finalCart);
+    fetch(`https://fakestoreapi.com/carts`, {
+          method: "POST",
+          body: JSON.stringify({
+            userId: user.id,
+            date: Date.now(),
+            products: finalCart.map((item) => ({
+              productId: item.product.id,
+              quantity: item.count
+            })),
+          }),
+        });
+  }, [cart]);
 
   let total = 0;
   return (
