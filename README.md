@@ -26,3 +26,7 @@ run the tests using:
 ```bash
 yarn jest
 ```
+
+## Deployment
+
+Open [https://xmas-droppe.herokuapp.com/](https://xmas-droppe.herokuapp.com/) with your browser to see the deployed version.
